@@ -1,6 +1,2 @@
 # Dependencies
 node_modules/
-
-# Environment variables (CRITICAL)
-.env
-.env.*

@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
-import { messageInRaw } from "svix";
 
 const connectDB = async () => {
     try {
         mongoose.connection.on('connected', () => {
             console.log("Database Connected");
         })
-        await mongoose.connect(`${process.env.MONGODB_URL}/hotel-booking`);
+        await mongoose.connect(`${process.env.MONGODB_URL}/Hotel-booking`);
     } 
     catch (error) {
         console.log(error.message);
