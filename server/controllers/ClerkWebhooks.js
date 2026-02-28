@@ -43,7 +43,6 @@ const clerkWebhooks = async (req, res) => {
             case "user.created":{
                 await User.create(userData);
                 console.log("user cre");
-                
                 break;
             }  
             
