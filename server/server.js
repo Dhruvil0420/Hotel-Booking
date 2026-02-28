@@ -13,23 +13,18 @@ const app = express();
 
 app.use(cors());
 
-// API to listen to Clerk Webhooks
-app.post(
-  "/api/clerk",
-  express.raw({ type: "application/json" }),
-  clerkWebhooks
-); 
-
 // Middleware
 app.use(express.json());
 app.use(clerkMiddleware());
 
-app.get('/',(req,res) => {
+app.use('/api/clerk',clerkWebhooks);
+
+app.get('/', (req, res) => {
     res.send("API is working");
 })
 
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT || 3000;
 
-app.listen(PORT,() => {
-    console.log(`server running on Port ${PORT}`);  
+app.listen(PORT, () => {
+    console.log(`server running on Port ${PORT}`);
 })

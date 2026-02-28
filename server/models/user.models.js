@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true
+        default: ""
     },
     role: {
         type: String,
@@ -25,11 +25,11 @@ const UserSchema = new mongoose.Schema({
     recentSearchCities: [
         {
             type: String,
-            required: true
+            default: ""
         }
     ]
 },{timestamps: true});
 
-const User = mongoose.model("User",UserSchema); 
+const User = mongoose.models.User || mongoose.model("User",UserSchema); 
 
 export default User;

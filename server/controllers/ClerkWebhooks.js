@@ -1,16 +1,17 @@
-import User from "../models/user.models.js";
 import { Webhook } from "svix";
+import User from "../models/user.models.js";
 
 const clerkWebhooks = async (req, res) => {
-
     try {
         console.log("This Try cathc");
-        
+
         // create a svix instance with clerk webhook secret
 
         const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
-        const payload = req.body.toString();
+        if (!whook) {
+            return res.status(500).json({ message: "Missing webhook secret" });
+        }
 
         // Geting Headers
 
@@ -18,45 +19,44 @@ const clerkWebhooks = async (req, res) => {
             "svix-id": req.headers["svix-id"],
             "svix-timestamp": req.headers["svix-timestamp"],
             "svix-signature": req.headers["svix-signature"]
-        }
+        };
 
         //  Verifying Headers
-        await whook.verify(payload, headers);
-        
+        await whook.verify(JSON.stringify(req.body), headers);
+
         // Geting Data From Body
-        const {data,type} = req.body
+        const { data, type } = req.body
 
         console.log("Webhook hit:", type);
 
-
         const userData = {
             _id: data.id,
-            email:data.email_addresses[0].email_address,
+            email: data.email_addresses[0].email_address,
             username: data.first_name + " " + data.last_name,
-            image: data.image_url 
+            image: data.image_url
         }
 
         console.log(userData);
-        
+
         // Switch cases for Differernt Event 
 
         switch (type) {
-            case "user.created":{
+            case "user.created": {
                 await User.create(userData);
                 console.log("user cre");
                 break;
-            }  
-            
-            case "user.updated":{
+            }
+
+            case "user.updated": {
                 await User.findByIdAndUpdate(data.id, userData);
                 break;
             }
 
-            case "user.deleted":{
+            case "user.deleted": {
                 await User.findByIdAndDelete(data.id);
                 break;
             }
-                
+
             default:
                 break;
         }
