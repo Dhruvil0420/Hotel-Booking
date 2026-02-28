@@ -9,6 +9,8 @@ const clerkWebhooks = async (req, res) => {
 
         const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
+        const payload = req.body.toString();
+
         // Geting Headers
 
         const headers = {
@@ -18,10 +20,13 @@ const clerkWebhooks = async (req, res) => {
         }
 
         //  Verifying Headers
-        await whook.verify(JSON.stringify(req.body), headers);
+        await whook.verify(payload, headers);
         
         // Geting Data From Body
         const {data,type} = req.body
+
+        console.log("Webhook hit:", type);
+
 
         const userData = {
             _id: data.id,
@@ -30,11 +35,15 @@ const clerkWebhooks = async (req, res) => {
             image: data.image_url 
         }
 
+        console.log(userData);
+        
         // Switch cases for Differernt Event 
 
         switch (type) {
             case "user.created":{
                 await User.create(userData);
+                console.log("user cre");
+                
                 break;
             }  
             
