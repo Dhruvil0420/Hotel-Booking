@@ -16,18 +16,7 @@ const UserSchema = new mongoose.Schema({
     image: {
         type: String,
         default: ""
-    },
-    role: {
-        type: String,
-        enum: ["user","hotelOwner"],
-        default: "user"
-    },
-    recentSearchCities: [
-        {
-            type: String,
-            default: ""
-        }
-    ]
+    }
 },{timestamps: true});
 
 const User = mongoose.models.User || mongoose.model("User",UserSchema); 
