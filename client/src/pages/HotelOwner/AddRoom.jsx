@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
-import Title from '../../components/Title'
+import Title from '../../components/Title.jsx'
 import { assets } from '../../assets/assets'
-import { Appcontext } from '../../context/AppContext'
+import { Appcontext } from '../../context/AppContext.jsx'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 

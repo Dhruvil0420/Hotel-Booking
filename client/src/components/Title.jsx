@@ -1,4 +1,3 @@
-import React from 'react'
 
 function Title ({title,subTitle,font,align}) {
   return (

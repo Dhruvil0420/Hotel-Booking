@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Appcontext } from '../context/AppContext';
 import Title from './Title';
 import Hotelcard from './Hotelcard';

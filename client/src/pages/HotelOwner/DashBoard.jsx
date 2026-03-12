@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import Title from '../../components/Title';
 import Loading from '../../components/Loading';
-import { assets, dashboardDummyData } from '../../assets/assets';
+import { assets } from '../../assets/assets';
 import axios from 'axios';
 import { Appcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';

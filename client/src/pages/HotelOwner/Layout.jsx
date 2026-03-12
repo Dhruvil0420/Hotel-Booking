@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom';
-import Navbar from '../../components/HotelOwner/navbar';
-import Sidebar from '../../components/HotelOwner/Sidebar';
 import { useContext } from 'react';
 import { Appcontext } from '../../context/AppContext';
 import { useEffect } from 'react';
 import Loading from '../../components/Loading';
+import Navbar from '../../components/HotelOwner/Navbar';
+import Sidebar from '../../components/HotelOwner/Sidebar';
 
-function Layout () {
-  
+function Layout() {
+
   const { isOwner, isOwnerChecked, user, isLoaded, navigate } = useContext(Appcontext);
 
   useEffect(() => {
