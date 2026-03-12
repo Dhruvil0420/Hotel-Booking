@@ -6,8 +6,8 @@ import { Appcontext } from '../../context/AppContext';
 import { useEffect } from 'react';
 import Loading from '../../components/Loading';
 
-function LayOut() {
-
+function Layout () {
+  
   const { isOwner, isOwnerChecked, user, isLoaded, navigate } = useContext(Appcontext);
 
   useEffect(() => {
@@ -39,4 +39,5 @@ function LayOut() {
   )
 }
 
-export default LayOut;
+export default Layout;
+

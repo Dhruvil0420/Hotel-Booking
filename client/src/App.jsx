@@ -7,12 +7,12 @@ import AllRooms from "./pages/AllRooms.jsx";
 import RoomDetails from "./pages/RoomDetails.jsx";
 import MyBokings from "./pages/MyBokings.jsx";
 import HotelReg from "./components/HotelReg.jsx";
-import LayOut from "./pages/HotelOwner/LayOut.jsx";
-import { Toaster } from 'react-hot-toast'
 import { Appcontext } from "./context/AppContext.jsx";
 import DashBoard from "./pages/HotelOwner/DashBoard.jsx";
 import AddRoom from "./pages/HotelOwner/AddRoom.jsx";
 import ListRoom from "./pages/HotelOwner/ListRoom.jsx";
+import { Toaster } from 'react-hot-toast'
+import Layout from "./pages/HotelOwner/Layout.jsx";
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
           <Route path="/rooms" element={<AllRooms />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
           <Route path="/my-bookings" element={<MyBokings />} />
-          <Route path="/owner" element={<LayOut />}>
+          <Route path="/owner" element={<Layout/>}>
             <Route index element={<DashBoard />} />
             <Route path="add-room" element={<AddRoom />} />
             <Route path="list-room" element={<ListRoom />} />
