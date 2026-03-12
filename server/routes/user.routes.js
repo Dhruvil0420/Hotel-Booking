@@ -1,6 +1,7 @@
 import express from "express"
 import { getuserData, storeResentSerachedCities } from "../controllers/user.controllers.js";
-import requireAuth from "../middleware/User.middleware.js";
+import requireAuth from "../middelware/user.middelware.js";
+
 
 const userRouter = express.Router();
 

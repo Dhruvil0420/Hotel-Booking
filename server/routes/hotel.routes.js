@@ -1,7 +1,8 @@
 import express from 'express'
 
-import requireAuth from '../middleware/User.middleware.js';
+
 import { registerHotel } from '../controllers/hotel.controllers.js';
+import requireAuth from '../middelware/user.middelware.js';
 
 const hotelRotes = express.Router();
 
