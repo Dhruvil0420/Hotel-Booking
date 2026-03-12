@@ -1,4 +1,4 @@
-import Hotelcard from './Hotelcard';
+import Hotelcard from './HotelCard';
 import Title from './Title';
 import { useContext } from 'react';
 import { Appcontext } from '../context/AppContext';
