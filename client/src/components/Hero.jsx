@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { assets, cities } from '../assets/assets';
 import { Appcontext } from '../context/AppContext';
-import heroImage from "../assets/heroimage.png";
+
 import axios from 'axios';
 
 function Hero() {
@@ -28,7 +28,7 @@ function Hero() {
     }
     return (
         <div
-        style={{backgroundImage: `url(${heroImage})`}}
+        style={{backgroundImage: `url(${assets.heroImage})`}}
          className='flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white bg-no-repeat bg-center bg-cover h-screen'>
             
             <p className='bg-[#49B9FF]/50 px-3.5 py-1 rounded-full mt-20'>The Ultimate Hotel Experience</p>
