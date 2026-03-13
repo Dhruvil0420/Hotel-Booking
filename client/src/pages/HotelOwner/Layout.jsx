@@ -6,6 +6,7 @@ import Navbar from '../../components/HotelOwner/Navbar';
 import Sidebar from '../../components/HotelOwner/Sidebar';
 import Loader from '../../components/loader';
 
+
 function Layout() {
 
   const { isOwner, isOwnerChecked, user, isLoaded, navigate } = useContext(Appcontext);
