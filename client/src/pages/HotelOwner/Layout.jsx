@@ -4,7 +4,7 @@ import { Appcontext } from '../../context/AppContext';
 import { useEffect } from 'react';
 import Navbar from '../../components/HotelOwner/Navbar';
 import Sidebar from '../../components/HotelOwner/Sidebar';
-import Loader from '../../components/loader';
+import Loader from '../../components/Loader.jsx';
 
 
 function Layout() {

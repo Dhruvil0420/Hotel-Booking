@@ -4,7 +4,7 @@ import Title from '../../components/Title';
 import axios from 'axios';
 import { Appcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
-import Loader from '../../components/loader';
+import Loader from '../../components/Loader.jsx';
 
 
 function ListRoom() {
