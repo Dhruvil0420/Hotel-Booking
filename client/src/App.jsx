@@ -13,8 +13,7 @@ import AddRoom from "./pages/HotelOwner/AddRoom.jsx";
 import ListRoom from "./pages/HotelOwner/ListRoom.jsx";
 import { Toaster } from 'react-hot-toast'
 import Layout from "./pages/HotelOwner/Layout.jsx";
-import Loader from "./components/loader.jsx";
-
+import Loader from "./components/Loader.jsx";
 
 function App() {
 
