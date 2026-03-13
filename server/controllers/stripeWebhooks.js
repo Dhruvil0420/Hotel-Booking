@@ -4,7 +4,6 @@ import Booking from "../models/booking.models.js";
 // APi To Handle Stripe WebHooks 
 
 const stripeWebhooks = async (req, res) => {
-
     // Strip GateWay Initizaition
     const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
     const sig = req.headers["stripe-signature"];
