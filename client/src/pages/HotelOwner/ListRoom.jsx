@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import Title from '../../components/Title';
-import Loading from '../../components/Loading';
+
 import axios from 'axios';
 import { Appcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
+import Loader from '../../components/loader';
 
 function ListRoom() {
 
@@ -68,7 +69,11 @@ function ListRoom() {
     }
   }, [user])
 
-  if (user && loading) return <Loading />;
+  if (user && loading) {
+    return (
+      <Loader/>
+    );
+  }
 
   return (
     <div>

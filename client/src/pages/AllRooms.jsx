@@ -105,7 +105,7 @@ function AllRooms() {
             return b.pricePerNight - a.pricePerNight;
         }
         if (selectedsort === "Newest First") {
-            return new Date(a.createdAt) - new Date(b.createdAt);
+            return new Date(b.createdAt) - new Date(a.createdAt);
         }
         return 0;
     }
@@ -131,8 +131,8 @@ function AllRooms() {
             roomType: [],
             priceRange: [],
         });
-        selectedsort("");
-        searchParams({});
+        setSelectedsort("");
+        setSearchParams({});
     }
 
     return (

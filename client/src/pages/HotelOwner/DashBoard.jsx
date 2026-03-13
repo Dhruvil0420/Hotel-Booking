@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import Title from '../../components/Title';
-import Loading from '../../components/Loading';
 import { assets } from '../../assets/assets';
 import axios from 'axios';
 import { Appcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
+import Loader from '../../components/loader';
 
 function DashBoard() {
 
@@ -47,7 +47,7 @@ function DashBoard() {
 
   if (user && loading) {
     return (
-      <Loading />
+      <Loader />
     )
   };
 

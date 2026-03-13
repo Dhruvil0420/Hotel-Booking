@@ -2,9 +2,9 @@ import { Outlet } from 'react-router-dom';
 import { useContext } from 'react';
 import { Appcontext } from '../../context/AppContext';
 import { useEffect } from 'react';
-import Loading from '../../components/Loading';
 import Navbar from '../../components/HotelOwner/Navbar';
 import Sidebar from '../../components/HotelOwner/Sidebar';
+import Loader from '../../components/loader';
 
 function Layout() {
 
@@ -23,7 +23,7 @@ function Layout() {
 
   if (isOwnerChecked && !isOwner) return null;
   if (!isLoaded || (user && !isOwnerChecked)) {
-    return <Loading />;
+    return <Loader />;
   }
 
   return (

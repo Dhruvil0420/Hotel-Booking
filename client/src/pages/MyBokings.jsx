@@ -1,38 +1,58 @@
 import { useContext, useEffect, useState } from 'react'
 import Title from '../components/Title'
-import Loading from '../components/Loading'
 import { assets } from '../assets/assets'
 import axios from 'axios';
 import { Appcontext } from '../context/AppContext';
 import toast from 'react-hot-toast';
+import Loader from '../components/loader';
 
 function MyBokings() {
 
-    const {getToken,user} = useContext(Appcontext);
+    const { user,getToken } = useContext(Appcontext);
 
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const featchUserBookingsData = async() => {
+    const featchUserBookingsData = async () => {
         const token = await getToken();
         setLoading(true);
         try {
-            const {data} = await axios.get("/api/booking/user",{
-                headers: { Authorization: `Bearer ${token}`}
+            const { data } = await axios.get("/api/booking/user", {
+                headers: { Authorization: `Bearer ${token}` }
             })
-            console.log(data); 
-            if(data.success){
+            console.log(data);
+            if (data.success) {
                 setBookings(data.bookings);
             }
-            else{
+            else {
                 toast.error(data.message);
             }
-        } 
+        }
         catch (error) {
             toast.error(error.message);
         }
         finally {
             setLoading(false);
+        }
+    }
+
+    const handlePayment = async(bookingId) => {
+        try {
+            const token = await getToken();
+            const {data} = await axios.post("/api/booking/stripe-payment",{bookingId},{
+                headers: {Authorization: `Bearer ${token}`}
+            });
+            if(data.success){
+                window.location.href = data.url
+            }
+            else{
+                toast.error(data.message);
+                console.log("Eles OF payemtn");
+                
+            }
+        } 
+        catch (error) {
+            toast.error(error.message);
         }
     }
 
@@ -44,7 +64,11 @@ function MyBokings() {
         }
     }, [user]);
 
-    if (user && loading) return <Loading />;
+    if (user && loading) {
+        return (
+            <Loader />
+        );
+    }
 
     return (
         <div className='py-28 md:pb-35 md:pt-32 px-4 md:px-16 lg:mx-24 xl:mx-32'>
@@ -102,7 +126,7 @@ function MyBokings() {
                                 </p>
                             </div>
                             {!booking.isPaid && (
-                                <button className='border rounded-full px-4 py-1.5 mt-4 text-xs border-gray-400 cursor-pointer hover:bg-gray-50 transition-all'>Pay now</button>
+                                <button onClick={() => handlePayment(booking._id)} className='border rounded-full px-4 py-1.5 mt-4 text-xs border-gray-400 cursor-pointer hover:bg-gray-50 transition-all'>Pay now</button>
                             )}
                         </div>
                     </div>
