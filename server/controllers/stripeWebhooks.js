@@ -27,7 +27,7 @@ const stripeWebhooks = async (req, res) => {
             payment_intent: paymentintentId,
         });
 
-        const bookingId  = session.metadata.bookingId;
+        const bookingId = session.data[0].metadata.bookingId;
 
         // Mark Payment as Paid
 
