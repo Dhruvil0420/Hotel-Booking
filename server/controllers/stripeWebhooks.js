@@ -18,7 +18,7 @@ const stripeWebhooks = async (req, res) => {
     }
 
     // Handle Event 
-    if (event.type === "payment_intent.succeeded") {
+    if (event.type === "checkout.session.completed") {
         const paymentintent = event.data.object;
         const paymentintentId = paymentintent.id;
 
