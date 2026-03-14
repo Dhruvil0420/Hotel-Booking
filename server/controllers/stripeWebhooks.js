@@ -10,9 +10,10 @@ const stripeWebhooks = async (req, res) => {
     let event;
 
     try {
-        event = stripeInstance.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOKS_KEY)
+        event = stripeInstance.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOKS_SECRET)
     }
     catch (error) {
+        console.log(error.message);
         return res.status(400).send(`Webhooks Error: ${error.message}`);
     }
 
@@ -30,7 +31,7 @@ const stripeWebhooks = async (req, res) => {
 
         // Mark Payment as Paid
 
-        await Booking.findByIdAndUpdate(bookingId, { isPaid: true, paymentMethod: "Stripe" })
+        await Booking.findByIdAndUpdate(bookingId, { isPaid: true, paymentMethod: "stripe" })
     }
     else {
         console.log("Unhadled Evevt Type:", event.type);
