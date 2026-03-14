@@ -9,7 +9,7 @@ import hotelRotes from './routes/hotel.routes.js';
 import connectCloudinary from './configs/cloudinary.js';
 import roomRoutes from './routes/room.routes.js';
 import bookingRoutes from './routes/booking.routes.js';
-import stripeWebhooks from './controllers/stripeWebhooks.js';
+import stripeWebhooks from './controllers/stripeWebhooks.js'
 
 await connectDB();
 await connectCloudinary();

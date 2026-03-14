@@ -1,11 +1,11 @@
-import Stripe from "stripe";
+import stripe from "stripe";
 import Booking from "../models/booking.models.js";
 
 // APi To Handle Stripe WebHooks 
 
 const stripeWebhooks = async (req, res) => {
     // Strip GateWay Initizaition
-    const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
     const sig = req.headers["stripe-signature"];
     let event;
 
@@ -31,7 +31,7 @@ const stripeWebhooks = async (req, res) => {
 
         // Mark Payment as Paid
 
-        await Booking.findByIdAndUpdate(bookingId, { isPaid: true, paymentMethod: "stripe" })
+        await Booking.findByIdAndUpdate(bookingId, { isPaid: true, paymentMethod: "Stripe" })
     }
     else {
         console.log("Unhadled Evevt Type:", event.type);
