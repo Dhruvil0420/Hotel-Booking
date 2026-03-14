@@ -11,8 +11,8 @@ import roomRoutes from './routes/room.routes.js';
 import bookingRoutes from './routes/booking.routes.js';
 import stripeWebhooks from './controllers/stripeWebhooks.js';
 
-connectDB();
-connectCloudinary();
+await connectDB();
+await connectCloudinary();
 
 const app = express();
 
