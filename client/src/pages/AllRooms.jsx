@@ -26,7 +26,7 @@ function AllRooms() {
         )
     }
 
-    const { rooms, navigate , currency} = useContext(Appcontext);
+    const { rooms, navigate} = useContext(Appcontext);
 
     const [searchParams, setSearchParams] = useSearchParams()
 

@@ -126,7 +126,7 @@ function AddRoom() {
                 id={`roomImage${key}`}
                 type="file"
                 hidden
-                disabled={loading} // ✅ lock during loading
+                disabled={loading} // 
                 onChange={e =>
                   setImages(prev => ({
                     ...prev,
