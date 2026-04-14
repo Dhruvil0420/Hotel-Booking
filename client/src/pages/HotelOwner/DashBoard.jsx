@@ -80,37 +80,56 @@ function DashBoard() {
 
       </div>
 
-      {/* Recent Booking */}
-      <h2 className='text-xl font-medium text-blue-950/70 mb-5'>Recent Bookings</h2>
+      {dashBoardData.bookings.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-14 px-6 text-gray-500 border border-dashed rounded-xl bg-gray-50 gap-4">
 
-      <div className='w-full max-w-3xl text-left border border-gray-300 rounded-lg max-h-80 overflow-y-scroll '>
+          {/* Title */}
+          <p className="text-lg font-semibold text-gray-700">
+            No Bookings Found
+          </p>
 
-        <table className='w-full'>
-          <thead className='bg-gray-50'>
-            <tr>
-              <th className='py-3 px-4 text-gray-800 font-medium' >User Name</th>
-              <th className='py-3 px-4 text-gray-800 font-medium max-sm:hidden' >Room Name</th>
-              <th className='py-3 px-4 text-gray-800 font-medium text-center' >Total Amount</th>
-              <th className='py-3 px-4 text-gray-800 font-medium text-center' >Payment Status</th>
-            </tr>
-          </thead>
+          {/* Subtitle */}
+          <p className="text-sm text-gray-500 text-center max-w-xs">
+            You haven’t received any bookings yet. Once users start booking, they will appear here.
+          </p>
 
-          <tbody className='text-sm'>
-            {dashBoardData.bookings.map((item, index) => (
-              <tr key={index}>
-                <td className='py-3 px-4 text-gray-700 border-t border-gray-300'>{item.user.username}</td>
-                <td className='py-3 px-4 text-gray-700 border-t border-gray-300 max-sm:hidden'>{item.room.roomType}</td>
-                <td className='py-3 px-4 text-gray-700 border-t border-gray-300 text-center'> {currency} {item.totalPrice}</td>
-                <td className='py-3 px-4 text-gray-700 border-t border-gray-300 text-center'>
-                  <button className={`border px-3 py-1 text-sm rounded-full mx-auto ${item.isPaid ? "bg-green-200 text-green-600" : "bg-amber-200 text-yellow-600"}`}>
-                    {item.isPaid ? "Completed" : "Pending"}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        </div>
+      ) : (
+        <>
+          {/* Recent Booking */}
+          <h2 className='text-xl font-medium text-blue-950/70 mb-5'>Recent Bookings</h2>
+          <div className='w-full max-w-3xl text-left border border-gray-300 rounded-lg max-h-80 overflow-y-scroll '>
+
+            <table className='w-full'>
+              <thead className='bg-gray-50'>
+                <tr>
+                  <th className='py-3 px-4 text-gray-800 font-medium' >User Name</th>
+                  <th className='py-3 px-4 text-gray-800 font-medium max-sm:hidden' >Room Name</th>
+                  <th className='py-3 px-4 text-gray-800 font-medium text-center' >Total Amount</th>
+                  <th className='py-3 px-4 text-gray-800 font-medium text-center' >Payment Status</th>
+                </tr>
+              </thead>
+
+              <tbody className='text-sm'>
+                {dashBoardData.bookings.map((item, index) => (
+                  <tr key={index}>
+                    <td className='py-3 px-4 text-gray-700 border-t border-gray-300'>{item.user.username}</td>
+                    <td className='py-3 px-4 text-gray-700 border-t border-gray-300 max-sm:hidden'>{item.room.roomType}</td>
+                    <td className='py-3 px-4 text-gray-700 border-t border-gray-300 text-center'> {currency} {item.totalPrice}</td>
+                    <td className='py-3 px-4 text-gray-700 border-t border-gray-300 text-center'>
+                      <button className={`border px-3 py-1 text-sm rounded-full mx-auto ${item.isPaid ? "bg-green-200 text-green-600" : "bg-amber-200 text-yellow-600"}`}>
+                        {item.isPaid ? "Completed" : "Pending"}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+
+      )}
+
     </div>
   )
 }
