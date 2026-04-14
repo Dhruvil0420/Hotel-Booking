@@ -8,7 +8,7 @@ import Loader from '../components/Loader.jsx';
 
 function MyBokings() {
 
-    const { user,getToken } = useContext(Appcontext);
+    const { user, getToken } = useContext(Appcontext);
 
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,7 +20,6 @@ function MyBokings() {
             const { data } = await axios.get("/api/booking/user", {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            console.log(data);
             if (data.success) {
                 setBookings(data.bookings);
             }
@@ -36,21 +35,19 @@ function MyBokings() {
         }
     }
 
-    const handlePayment = async(bookingId) => {
+    const handlePayment = async (bookingId) => {
         try {
             const token = await getToken();
-            const {data} = await axios.post("/api/booking/stripe-payment",{bookingId},{
-                headers: {Authorization: `Bearer ${token}`}
+            const { data } = await axios.post("/api/booking/stripe-payment", { bookingId }, {
+                headers: { Authorization: `Bearer ${token}` }
             });
-            if(data.success){
+            if (data.success) {
                 window.location.href = data.url
             }
-            else{
+            else {
                 toast.error(data.message);
-                console.log("Eles OF payemtn");
-                
             }
-        } 
+        }
         catch (error) {
             toast.error(error.message);
         }
@@ -74,64 +71,71 @@ function MyBokings() {
         <div className='py-28 md:pb-35 md:pt-32 px-4 md:px-16 lg:mx-24 xl:mx-32'>
             <Title title="My Bookings" subTitle="Easily manage your past, current, and upcoming hotel reservations in one place. Plan your trips seamlessly with just a few clicks" align="left" />
 
-            <div className='max-w-6xl mt-8 w-full text-gray-800'>
-
-                <div className='hidden md:grid md:grid-cols-[3fr_2fr_1fr] w-full border-b border-gray-300 font-medium text-base py-3'>
-                    <div className='w-1/3'>Hotels</div>
-                    <div className='w-1/3'>Date & Timings</div>
-                    <div className='w-1/3'>Hotels</div>
+            {bookings.length === 0 ? (
+                <div className='flex flex-col items-center justify-center mt-20 py-16 bg-gray-50 rounded-lg'>
+                    <p className='text-2xl font-playfair text-gray-600 mb-2'>No Bookings Yet</p>
+                    <p className='text-gray-500 text-sm'>Start exploring hotels to make your first reservation</p>
                 </div>
+            ) : (
+                <div className='max-w-6xl mt-8 w-full text-gray-800'>
 
-                {bookings.map((booking, index) => (
-                    <div key={booking._id} className='grid grid-cols-1 md:grid-cols-[3fr_2fr_1fr] w-full border-b border-gray-300 py-6 first:border-t'>
-
-                        {/* Hotel Details */}
-                        <div className='flex flex-col md:flex-row'>
-                            <img src={booking.room.images[0]} alt="hotel-img" className='min-md:w-44 rounded object-cover shadow' />
-                            <div className='flex flex-col gap-1.5 max-md:mt-3 min-md:ml-4'>
-                                <p className='font-playfair text-2xl'>
-                                    {booking.hotel.name}
-                                    <span className='font-inter text-sm'> ({booking.room.roomType})</span>
-                                </p>
-                                <div className='flex items-center gap-1 text-sm text-gray-500'>
-                                    <img src={assets.locationIcon} alt="location-icon" />
-                                    <p>{booking.hotel.address}</p>
-                                </div>
-                                <div className='flex items-center gap-1 text-sm text-gray-500'>
-                                    <img src={assets.guestsIcon} alt="guest-icon" />
-                                    <p>Guests: {booking.guests}</p>
-                                </div>
-                                <p>Total: ${booking.totalPrice}</p>
-                            </div>
-                        </div>
-
-                        {/* Date & time */}
-                        <div className='flex flex-row md:items-center md:gap-12 mt-3 gap-8'>
-                            <div>
-                                <p>Check-In:</p>
-                                <p className='text-gray-500 text-sm'>{new Date(booking.checkInDate).toDateString()}</p>
-                            </div>
-                            <div>
-                                <p>Check-Out:</p>
-                                <p className='text-gray-500 text-sm'>{new Date(booking.checkOutDate).toDateString()}</p>
-                            </div>
-                        </div>
-
-                        {/* Payment status */}
-                        <div className='flex flex-col justify-center items-start pt-3'>
-                            <div className='flex items-center gap-3'>
-                                <div className={`rounded-full h-3 w-3 ${booking.isPaid ? "bg-green-500" : "bg-red-500"}`}></div>
-                                <p className={`text-sm ${booking.isPaid ? "text-green-500" : "text-red-500"}`}>
-                                    {booking.isPaid ? "Paid" : "UnPaid"}
-                                </p>
-                            </div>
-                            {!booking.isPaid && (
-                                <button onClick={() => handlePayment(booking._id)} className='border rounded-full px-4 py-1.5 mt-4 text-xs border-gray-400 cursor-pointer hover:bg-gray-50 transition-all'>Pay now</button>
-                            )}
-                        </div>
+                    <div className='hidden md:grid md:grid-cols-[3fr_2fr_1fr] w-full border-b border-gray-300 font-medium text-base py-3'>
+                        <div className='w-1/3'>Hotels</div>
+                        <div className='w-1/3'>Date & Timings</div>
+                        <div className='w-1/3'>Hotels</div>
                     </div>
-                ))}
-            </div>
+
+                    {bookings.map((booking) => (
+                        <div key={booking._id} className='grid grid-cols-1 md:grid-cols-[3fr_2fr_1fr] w-full border-b border-gray-300 py-6 first:border-t'>
+
+                            {/* Hotel Details */}
+                            <div className='flex flex-col md:flex-row'>
+                                <img src={booking.room.images[0]} alt="hotel-img" className='min-md:w-44 rounded object-cover shadow' />
+                                <div className='flex flex-col gap-1.5 max-md:mt-3 min-md:ml-4'>
+                                    <p className='font-playfair text-2xl'>
+                                        {booking.hotel.name}
+                                        <span className='font-inter text-sm'> ({booking.room.roomType})</span>
+                                    </p>
+                                    <div className='flex items-center gap-1 text-sm text-gray-500'>
+                                        <img src={assets.locationIcon} alt="location-icon" />
+                                        <p>{booking.hotel.address}</p>
+                                    </div>
+                                    <div className='flex items-center gap-1 text-sm text-gray-500'>
+                                        <img src={assets.guestsIcon} alt="guest-icon" />
+                                        <p>Guests: {booking.guests}</p>
+                                    </div>
+                                    <p>Total: ${booking.totalPrice}</p>
+                                </div>
+                            </div>
+
+                            {/* Date & time */}
+                            <div className='flex flex-row md:items-center md:gap-12 mt-3 gap-8'>
+                                <div>
+                                    <p>Check-In:</p>
+                                    <p className='text-gray-500 text-sm'>{new Date(booking.checkInDate).toDateString()}</p>
+                                </div>
+                                <div>
+                                    <p>Check-Out:</p>
+                                    <p className='text-gray-500 text-sm'>{new Date(booking.checkOutDate).toDateString()}</p>
+                                </div>
+                            </div>
+
+                            {/* Payment status */}
+                            <div className='flex flex-col justify-center items-start pt-3'>
+                                <div className='flex items-center gap-3'>
+                                    <div className={`rounded-full h-3 w-3 ${booking.isPaid ? "bg-green-500" : "bg-red-500"}`}></div>
+                                    <p className={`text-sm ${booking.isPaid ? "text-green-500" : "text-red-500"}`}>
+                                        {booking.isPaid ? "Paid" : "UnPaid"}
+                                    </p>
+                                </div>
+                                {!booking.isPaid && (
+                                    <button onClick={() => handlePayment(booking._id)} className='border rounded-full px-4 py-1.5 mt-4 text-xs border-gray-400 cursor-pointer hover:bg-gray-50 transition-all'>Pay now</button>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }

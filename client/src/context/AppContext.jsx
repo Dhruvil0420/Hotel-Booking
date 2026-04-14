@@ -14,13 +14,13 @@ const AppContextProvider = ({ children }) => {
     const navigate = useNavigate();
     const { user,isLoaded } = useUser();
     const { getToken } = useAuth();
-
+    
     const [isOwner, setIsOwner] = useState(false);
     const [isOwnerChecked, setIsOwnerChecked] = useState(false);
     const [showHotelReg, setShowHotelReg] = useState(false);
     const [searchedcities, setSearchedcities] = useState([]);
     const [rooms,setRooms] = useState([]);
-
+    
     let retryCount = 0;
     
     // FetchUSer 
@@ -53,7 +53,6 @@ const AppContextProvider = ({ children }) => {
     const fetchRooms = async () => {
         try {
             const {data} = await axios.get("/api/room/rooms");
-            console.log(data);
             if(data.success){
                 setRooms(data.rooms);
             }
@@ -65,6 +64,7 @@ const AppContextProvider = ({ children }) => {
             toast.error(error.message);
         }
     }
+    
     useEffect(() => {
         if (user) {
             setIsOwnerChecked(false);

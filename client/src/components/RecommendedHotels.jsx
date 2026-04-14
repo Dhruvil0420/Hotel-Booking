@@ -8,15 +8,23 @@ function RecommendedHotels() {
     const [recommended,setRecommended] = useState([]);
 
     const filterHotel = () => {
-        const filterHotels = rooms.slice().filter(room => searchedcities.includes(room.hotel.city));
-        setRecommended(filterHotels);
-    }
+    const citySet = new Set(
+        searchedcities.map(city => city.toLowerCase())
+    );
+
+    const filteredHotels = rooms.filter(room => {
+        const city = room?.hotel?.city?.toLowerCase();
+        return citySet.has(city);
+    });
+
+    setRecommended(filteredHotels);
+};
 
     useEffect(() => {
         filterHotel();
     },[searchedcities,rooms]);
 
-    return rooms.length > 0 && (
+    return recommended.length > 0 && (
         <div className='flex flex-col items-center px-6 md:px-16 lg:px-24 bg-slate-50 py-20 '>
 
             <Title title='Recommended Hotels' subTitle='Discover our handpicked selection of exceptional properties around the world, offering unparalleled luxury and unforgettable experiences' />

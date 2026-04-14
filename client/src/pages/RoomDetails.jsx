@@ -15,7 +15,7 @@ function RoomDetails() {
     const [formLoading, setFormLoading] = useState(false);
     const [checkInDate, setCheckInDate] = useState("");
     const [checkOutDate, setCheckOutDate] = useState("");
-    const [guests, setGusts] = useState(1);
+    const [guests, setGuests] = useState(1);
     const [isAvailabel, setIsAvailabel] = useState(false);
 
     useEffect(() => {
@@ -188,13 +188,13 @@ function RoomDetails() {
                         <label htmlFor="Guests" className='font-medium'>Guests</label>
                         <input
                             type="number"
-                            min={0}
+                            min={1}
                             max={6}
                             id='Guests'
                             value={guests}
-                            placeholder='0'
+                            placeholder='1'
                             required
-                            onChange={() => setGusts(e.target.value)}
+                            onChange={(e) => setGuests(e.target.value)}
                             className='max-w-20 border border-gray-300 rounded px-3 py-2 outline-none mt-1.5'
                         />
                     </div>
