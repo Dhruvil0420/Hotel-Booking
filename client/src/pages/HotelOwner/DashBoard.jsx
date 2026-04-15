@@ -63,7 +63,7 @@ function DashBoard() {
       />
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
         {/* Total Bookings */}
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-5 flex items-center gap-4">
