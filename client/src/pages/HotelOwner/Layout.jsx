@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import Navbar from '../../components/HotelOwner/Navbar';
 import Sidebar from '../../components/HotelOwner/Sidebar';
 import Loader from '../../components/Loader.jsx';
-
+import Footer from '../../components/Footer.jsx'
 
 function Layout() {
 
@@ -28,14 +28,18 @@ function Layout() {
   }
 
   return (
-    <div className='flex flex-col h-screen'>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className='flex h-full'>
+
+      <div className="flex flex-1">
         <Sidebar />
-        <div className='flex-1 p-4 pt-10 md:px-10 h-full'>
+
+        <div className="flex-1 pt-4 pb-2 px-2 md:px-6">
           <Outlet />
         </div>
       </div>
+
+      <Footer />
     </div>
   )
 }

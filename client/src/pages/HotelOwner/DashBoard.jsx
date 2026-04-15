@@ -53,81 +53,111 @@ function DashBoard() {
   };
 
   return (
-    <div>
-      <Title title='Dashboard' subTitle='Monitor your room listings, track bookings and analyze revenue—all in one place. Stay updated with real-time insights to ensure smooth operations.' align='left' font='outfit' />
+    <div className="w-full space-y-8">
 
-      <div className='flex gap-4 my-8'>
+      <Title
+        title="Dashboard"
+        subTitle="Monitor your room listings, track bookings and analyze revenue—all in one place."
+        align="left"
+        font="outfit"
+      />
 
-        {/* Total Booking */}
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-        <div className='bg-primary/3 rounded border border-primary/10 flex p-4 pr-8'>
-          <img src={assets.totalBookingIcon} alt="" className='max-sm:hidden h-10' />
-          <div className='flex flex-col font-medium sm:ml-4'>
-            <p className='text-blue-500 text-lg'>Total Bookings</p>
-            <p className='text-neutral-400 text-base'> {dashBoardData.totalBookings}</p>
+        {/* Total Bookings */}
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-5 flex items-center gap-4">
+          <img src={assets.totalBookingIcon} className="h-10 hidden sm:block" />
+          <div>
+            <p className="text-sm text-gray-500">Total Bookings</p>
+            <p className="text-2xl font-semibold text-gray-800">
+              {dashBoardData.totalBookings}
+            </p>
           </div>
         </div>
 
         {/* Total Revenue */}
-
-        <div className='bg-primary/3 rounded border border-primary/10 flex pr-8 p-4'>
-          <img src={assets.totalRevenueIcon} alt="" className='max-sm:hidden h-10' />
-          <div className='flex flex-col font-medium sm:ml-4'>
-            <p className='text-blue-500 text-lg'>Total Revenue</p>
-            <p className='text-neutral-400 text-base'> {currency} {dashBoardData.totalRevenue}</p>
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-5 flex items-center gap-4">
+          <img src={assets.totalRevenueIcon} className="h-10 hidden sm:block" />
+          <div>
+            <p className="text-sm text-gray-500">Total Revenue</p>
+            <p className="text-2xl font-semibold text-gray-800">
+              {currency} {dashBoardData.totalRevenue}
+            </p>
           </div>
         </div>
 
       </div>
 
+      {/* Empty State */}
       {dashBoardData.bookings.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-14 px-6 text-gray-500 border border-dashed rounded-xl bg-gray-50 gap-4">
-
-          {/* Title */}
-          <p className="text-lg font-semibold text-gray-700">
+        <div className="flex flex-col items-center justify-center py-20 px-6 border border-dashed border-gray-300 rounded-xl bg-gray-50 text-center">
+          <p className="text-lg font-semibold text-gray-800">
             No Bookings Found
           </p>
-
-          {/* Subtitle */}
-          <p className="text-sm text-gray-500 text-center max-w-xs">
-            You haven’t received any bookings yet. Once users start booking, they will appear here.
+          <p className="text-sm text-gray-500 mt-2 max-w-md">
+            You haven’t received any bookings yet. Once users start booking rooms, they will appear here.
           </p>
-
         </div>
       ) : (
-        <>
-          {/* Recent Booking */}
-          <h2 className='text-xl font-medium text-blue-950/70 mb-5'>Recent Bookings</h2>
-          <div className='w-full max-w-3xl text-left border border-gray-300 rounded-lg max-h-80 overflow-y-scroll '>
+        <div className="space-y-4">
 
-            <table className='w-full'>
-              <thead className='bg-gray-50'>
-                <tr>
-                  <th className='py-3 px-4 text-gray-800 font-medium' >User Name</th>
-                  <th className='py-3 px-4 text-gray-800 font-medium max-sm:hidden' >Room Name</th>
-                  <th className='py-3 px-4 text-gray-800 font-medium text-center' >Total Amount</th>
-                  <th className='py-3 px-4 text-gray-800 font-medium text-center' >Payment Status</th>
-                </tr>
-              </thead>
+          <h2 className="text-xl font-semibold text-gray-800">
+            Recent Bookings
+          </h2>
 
-              <tbody className='text-sm'>
-                {dashBoardData.bookings.map((item, index) => (
-                  <tr key={index}>
-                    <td className='py-3 px-4 text-gray-700 border-t border-gray-300'>{item.user.username}</td>
-                    <td className='py-3 px-4 text-gray-700 border-t border-gray-300 max-sm:hidden'>{item.room.roomType}</td>
-                    <td className='py-3 px-4 text-gray-700 border-t border-gray-300 text-center'> {currency} {item.totalPrice}</td>
-                    <td className='py-3 px-4 text-gray-700 border-t border-gray-300 text-center'>
-                      <button className={`border px-3 py-1 text-sm rounded-full mx-auto ${item.isPaid ? "bg-green-200 text-green-600" : "bg-amber-200 text-yellow-600"}`}>
-                        {item.isPaid ? "Completed" : "Pending"}
-                      </button>
-                    </td>
+          {/* Table */}
+          <div className="w-full border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="py-3 px-4 text-left text-gray-600 font-medium">User</th>
+                    <th className="py-3 px-4 text-gray-600 font-medium hidden sm:table-cell">Room</th>
+                    <th className="py-3 px-4 text-center text-gray-600 font-medium">Amount</th>
+                    <th className="py-3 px-4 text-center text-gray-600 font-medium">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </>
+                </thead>
 
+                <tbody>
+                  {dashBoardData.bookings.map((item, index) => (
+                    <tr key={index} className="border-t hover:bg-gray-50 transition">
+
+                      <td className="py-3 px-4 text-gray-700">
+                        {item.user.username}
+                      </td>
+
+                      <td className="py-3 px-4 text-gray-700 hidden sm:table-cell">
+                        {item.room.roomType}
+                      </td>
+
+                      <td className="py-3 px-4 text-center text-gray-700">
+                        {currency} {item.totalPrice}
+                      </td>
+
+                      <td className="py-3 px-4 text-center">
+                        <span
+                          className={`px-3 py-1 text-xs font-medium rounded-full
+                      ${item.isPaid
+                              ? "bg-green-100 text-green-700"
+                              : "bg-yellow-100 text-yellow-700"}`}
+                        >
+                          {item.isPaid ? "Completed" : "Pending"}
+                        </span>
+                      </td>
+
+                    </tr>
+                  ))}
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+
+        </div>
       )}
 
     </div>
