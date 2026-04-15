@@ -30,16 +30,12 @@ function Layout() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-
       <div className="flex flex-1">
         <Sidebar />
-
         <div className="flex-1 pt-4 pb-2 px-2 md:px-6">
           <Outlet />
         </div>
       </div>
-
-      <Footer />
     </div>
   )
 }

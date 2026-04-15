@@ -129,7 +129,7 @@ function DashBoard() {
                         {item.user.username}
                       </td>
 
-                      <td className="py-3 px-4 text-gray-700 hidden sm:table-cell">
+                      <td className="py-3 px-4 text-gray-700 text-center hidden sm:table-cell">
                         {item.room.roomType}
                       </td>
 
